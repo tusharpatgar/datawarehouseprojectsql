@@ -91,4 +91,21 @@ case when sls_price <=0 OR sls_price is null
 end as sls_price
 from [bronze].[crm_sales_details]
 
+insert into silver.erp_cust_az12(
+cid,
+bdate,
+gen
+)
+select 
+case when cid like 'NAS%' then substring(cid,4,len(cid))
+	else cid
+end as cid,
+case when bdate> getdate() then null
+	else bdate 
+end as bdate,
+case when gen='f' or gen='Female' then 'FEMALE'
+	when gen='m' or gen='Male' then 'MALE'
+	else 'N/A'
+end as gen
 
+from [bronze].[erp_cust_az12];
