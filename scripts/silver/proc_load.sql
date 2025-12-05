@@ -109,3 +109,14 @@ case when gen='f' or gen='Female' then 'FEMALE'
 end as gen
 
 from [bronze].[erp_cust_az12];
+
+insert into [silver].[erp_loc_a101](
+cid,cntry)
+select 
+replace(cid,'-','') as cid,
+case when cntry is null or trim(cntry)='' then 'N/A'
+	when trim(cntry)='DE' then 'Germany'
+	when trim(cntry)='US' OR trim(cntry) ='USA' then 'United States'
+	else trim(cntry)
+end as cntry
+from [bronze].[erp_loc_a101]
