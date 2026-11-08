@@ -1,0 +1,17 @@
+# SQL Server local database and backup files
+*.mdf
+*.ldf
+*.ndf
+*.bak
+*.trn
+*.sqlplan
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary exports
+*.tmp
+*.log
